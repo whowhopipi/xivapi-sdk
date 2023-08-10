@@ -112,13 +112,4 @@ public class BeanCreater {
         }
     }
 
-    public static void main(String[] args) {
-        BeanCreater creater = new BeanCreater();
-        creater.setDescPackage("cn.ruihusoft.xviapi.pojo.item");
-        creater.setDescPath("D:\\Workspace\\git\\xivapi-sdk\\src\\main\\java\\cn\\ruihusoft\\xviapi\\pojo\\item\\bak");
-
-        JSONObject json = creater.readJsonFromFile("D:\\Workspace\\xviapi.json");
-        creater.createBean(json, "ItemResponse");
-        creater.printUnkownKey();
-    }
 }
