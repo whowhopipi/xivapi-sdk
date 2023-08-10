@@ -8,6 +8,7 @@ import com.google.common.base.CaseFormat;
 import lombok.Setter;
 
 import java.nio.charset.Charset;
+import java.util.HashSet;
 import java.util.Set;
 
 public class BeanCreater {
@@ -16,6 +17,8 @@ public class BeanCreater {
     private String descPackage;
     @Setter
     private String descPath;
+
+    private Set<String> unknowKey = new HashSet<>();
 
     public JSONObject readJsonFromFile(String path) {
         String json = FileUtil.readString(path, Charset.defaultCharset());
@@ -41,8 +44,9 @@ public class BeanCreater {
             // 判断值是什么类型
             String type = fetchFiledType(key, json.getObj(key));
             beanFile.append("    private " + type + " " + varName + ";\n");
-            if(type.contains("Object")) {
+            if (type.contains("Object")) {
                 beanFile.append("    // FIXME 类型不确定：" + key + "\n");
+                unknowKey.add(key);
             }
         }
 
@@ -102,6 +106,12 @@ public class BeanCreater {
         return varName.toString();
     }
 
+    public void printUnkownKey() {
+        for (String key : unknowKey) {
+            System.out.println(key);
+        }
+    }
+
     public static void main(String[] args) {
         BeanCreater creater = new BeanCreater();
         creater.setDescPackage("cn.ruihusoft.xviapi.pojo.item");
@@ -109,6 +119,6 @@ public class BeanCreater {
 
         JSONObject json = creater.readJsonFromFile("D:\\Workspace\\xviapi.json");
         creater.createBean(json, "ItemResponse");
-
+        creater.printUnkownKey();
     }
 }
