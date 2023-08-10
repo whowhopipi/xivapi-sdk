@@ -1,6 +1,9 @@
 package cn.ruihusoft.xviapi;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Filter;
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -26,6 +29,10 @@ public class BeanCreater {
     }
 
     public void createBean(JSONObject json, String fileName) {
+        createBean(json, fileName, true);
+    }
+
+    public void createBean(JSONObject json, String fileName, boolean flag) {
         StringBuilder beanFile = new StringBuilder();
         beanFile.append("package ").append(descPackage).append(";\n");
         beanFile.append("\n");
@@ -52,14 +59,27 @@ public class BeanCreater {
 
         beanFile.append("}");
 
-        FileUtil.writeString(beanFile.toString(), descPath + "/" + fileName + ".java", "utf-8");
+        if (flag) {
+            FileUtil.writeString(beanFile.toString(), descPath + "/" + fileName + ".java", "utf-8");
+        }
     }
 
     private String fetchFiledType(String key, Object value) {
-        String className = generatorName(key, false);
+        final String className = generatorName(key, false);
+
+        Set<Class<?>> classes = ClassUtil.scanPackage("cn.ruihusoft.xviapi.pojo", new Filter<Class<?>>() {
+            @Override
+            public boolean accept(Class<?> aClass) {
+                return aClass.getName().equals(className);
+            }
+        });
 
         String type = "Object";
-        if (value instanceof String) {
+        if (CollectionUtil.isEmpty(classes)) {
+            type = className;
+            // 原则上，还要继续扫描后面的
+            createBean((JSONObject) value, className, false);
+        } else if (value instanceof String) {
             type = "String";
         } else if (value instanceof Integer) {
             type = "Integer";
