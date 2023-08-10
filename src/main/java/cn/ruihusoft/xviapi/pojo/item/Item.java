@@ -1,18 +1,14 @@
-package cn.ruihusoft.xviapi.pojo;
+package cn.ruihusoft.xviapi.pojo.item;
 
 import cn.ruihusoft.xviapi.pojo.classjob.ClassJobCategory;
 import cn.ruihusoft.xviapi.pojo.classjob.ClassJobRepair;
 import cn.ruihusoft.xviapi.pojo.classjob.ClassJobUse;
 import cn.ruihusoft.xviapi.pojo.common.*;
-import cn.ruihusoft.xviapi.pojo.item.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class ItemResponse {
-    // FIXME 类型不确定
+public class Item {
 
     @JsonProperty("AdditionalData")
     private Integer additionalData;
@@ -162,14 +158,6 @@ public class ItemResponse {
     private Integer delayMs;
     @JsonProperty("Description")
     private String description;
-    // FIXME 类型不确定
-    @JsonProperty("DescriptionJSON_cn")
-    private Object descriptionJSONCn;
-    // FIXME 类型不确定
-    @JsonProperty("DescriptionJSON_kr")
-    private Object descriptionJSONKr;
-    @JsonProperty("Description_cn")
-    private String descriptionCn;
     @JsonProperty("Description_de")
     private String descriptionDe;
     @JsonProperty("Description_en")
@@ -178,8 +166,6 @@ public class ItemResponse {
     private String descriptionFr;
     @JsonProperty("Description_ja")
     private String descriptionJa;
-    @JsonProperty("Description_kr")
-    private String descriptionKr;
     @JsonProperty("Desynth")
     private Integer desynth;
     @JsonProperty("EquipRestriction")
@@ -192,11 +178,6 @@ public class ItemResponse {
     private Integer equipSlotCategoryTargetID;
     @JsonProperty("FilterGroup")
     private Integer filterGroup;
-    // FIXME 类型不确定
-    @JsonProperty("GameContentLinks")
-    private List<Object> gameContentLinks;
-    @JsonProperty("GamePatch")
-    private GamePatch gamePatch;
     // FIXME 类型不确定
     @JsonProperty("GrandCompany")
     private Object grandCompany;
@@ -237,14 +218,13 @@ public class ItemResponse {
     private String itemActionTarget;
     @JsonProperty("ItemActionTargetID")
     private Integer itemActionTargetID;
+    // FIXME 类型不确定
     @JsonProperty("ItemGlamour")
-    private ItemGlamour itemGlamour;
+    private Object itemGlamour;
     @JsonProperty("ItemGlamourTarget")
     private String itemGlamourTarget;
     @JsonProperty("ItemGlamourTargetID")
     private Integer itemGlamourTargetID;
-    @JsonProperty("ItemKind")
-    private ItemKind itemKind;
     @JsonProperty("ItemRepair")
     private ItemRepair itemRepair;
     @JsonProperty("ItemRepairTarget")
@@ -290,9 +270,6 @@ public class ItemResponse {
     private Integer levelItem;
     @JsonProperty("Lot")
     private Integer lot;
-    // FIXME 类型不确定
-    @JsonProperty("Materia")
-    private Object materia;
     @JsonProperty("MateriaSlotCount")
     private Integer materiaSlotCount;
     @JsonProperty("MaterializeType")
@@ -311,8 +288,6 @@ public class ItemResponse {
     private String nameFr;
     @JsonProperty("Name_ja")
     private String nameJa;
-    @JsonProperty("Patch")
-    private Integer patch;
     @JsonProperty("Plural")
     private String plural;
     @JsonProperty("Plural_de")
@@ -349,6 +324,4 @@ public class ItemResponse {
     private Integer startsWithVowel;
     @JsonProperty("SubStatCategory")
     private Integer subStatCategory;
-    @JsonProperty("Url")
-    private String url;
 }
