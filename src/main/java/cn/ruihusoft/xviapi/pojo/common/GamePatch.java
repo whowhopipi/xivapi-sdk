@@ -6,15 +6,6 @@ import lombok.Data;
 @Data
 public class GamePatch{
 
-    @JsonProperty("Banner")
-    private String	banner;
-
-    @JsonProperty("ExName")
-    private String	exName;
-
-    @JsonProperty("ExVersion")
-    private Integer	exVersion;
-
     @JsonProperty("ID")
     private Integer	id;
 
@@ -44,5 +35,14 @@ public class GamePatch{
 
     @JsonProperty("Version")
     private String	version;
+
+    @JsonProperty("Banner")
+    private String	banner;
+
+    @JsonProperty("ExName")
+    private String	exName;
+
+    @JsonProperty("ExVersion")
+    private Integer	exVersion;
 
 }
